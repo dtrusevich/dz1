@@ -157,13 +157,33 @@ public class MyListDemo<E> implements MyList<E> {
     }
 
     @Override
-    public void sort(int[] array) {
+    public void sort(Integer[] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - 1; j++) {
                 if (array[j] > array[j + 1]) {
                     int temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void sort(String[] strings) {
+        for (int i = 0; i < strings.length; i++) {
+            for (int j = 0; j < strings.length - 1; j++) {
+                for (int letter = 0; letter < strings[j].length(); letter++) {
+                    if (strings[j].charAt(letter) > strings[j + 1].charAt(letter)) {
+                        String temp = strings[j];
+                        strings[j] = strings[j + 1];
+                        strings[j + 1] = temp;
+                        break;
+                    } else if (strings[j].charAt(letter) == strings[j + 1].charAt(letter)) {
+                        continue;
+                    } else {
+                        break;
+                    }
                 }
             }
         }

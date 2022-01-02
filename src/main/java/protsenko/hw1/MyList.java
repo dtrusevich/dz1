@@ -128,7 +128,21 @@ public interface MyList<E> {
      */
     MyList<E> subList(int fromIndex, int toIndex);
 
-    void sort(int[] array);
+    void sort(Integer[] array);
+
+    /**
+     * Sorts an array of Integer values in ascending order
+     *
+     * Uses classical "Bubble sort"
+     */
+
+    void sort(String[] strings);
+
+    /**
+     * Sorts an array of String values in alphabetical order
+     *
+     * Uses classical "Bubble sort"
+     */
 
 }
 
