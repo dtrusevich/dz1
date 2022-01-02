@@ -128,5 +128,7 @@ public interface MyList<E> {
      */
     MyList<E> subList(int fromIndex, int toIndex);
 
+    void sort(int[] array);
+
 }
 
