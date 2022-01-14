@@ -1,7 +1,7 @@
 package protsenko.hw2;
 
 
-public class LinkedListTwo <E> implements MyList<E> {
+public class LinkedListTwo implements MyList<Object> {
 
     private static int counter;
     private Node head;
@@ -11,7 +11,7 @@ public class LinkedListTwo <E> implements MyList<E> {
 
     }
 
-    private class Node {
+    private static class Node {
 
         Node next;
         Object E;
@@ -72,7 +72,7 @@ public class LinkedListTwo <E> implements MyList<E> {
     }
 
     @Override
-    public boolean contains(E o) {
+    public boolean contains(Object o) {
         Node t = head;
         while (t != null) {
             if (t.getData() == o) {
@@ -84,7 +84,7 @@ public class LinkedListTwo <E> implements MyList<E> {
     }
 
     @Override
-    public boolean add(E data) {
+    public boolean add(Object data) {
 
         if (head == null) {
             head = new Node(data);
@@ -93,14 +93,11 @@ public class LinkedListTwo <E> implements MyList<E> {
         Node Temp = new Node(data);
         Node Current = head;
 
-        if (Current != null) {
-
-            while (Current.getNext() != null) {
-                Current = Current.getNext();
-            }
-
-            Current.setNext(Temp);
+        while (Current.getNext() != null) {
+            Current = Current.getNext();
         }
+
+        Current.setNext(Temp);
 
         incrementCounter();
         return true;
@@ -109,7 +106,7 @@ public class LinkedListTwo <E> implements MyList<E> {
 
 
     @Override
-    public boolean remove(E o) {
+    public boolean remove(Object o) {
     return false;
     }
 
@@ -138,7 +135,7 @@ public class LinkedListTwo <E> implements MyList<E> {
     }
 
     @Override
-    public boolean addAll(MyList<E> list) {
+    public boolean addAll(MyList<Object> list) {
         for (int i = 0; i < list.size(); i++) {
             add(list.get(i));
         }
@@ -152,10 +149,10 @@ public class LinkedListTwo <E> implements MyList<E> {
     }
 
     @Override
-    public E get(int index) {
+    public Object get(int index) {
         if (index < 0)
             return null;
-        Node Current = null;
+        Node Current;
         if (head != null) {
             Current = head.getNext();
             for (int i = 0; i < index; i++) {
@@ -164,19 +161,19 @@ public class LinkedListTwo <E> implements MyList<E> {
 
                 Current = Current.getNext();
             }
-            return (E) Current.getData();
+            return Current.getData();
         }
-        return (E) Current;
+        return null;
     }
 
     @Override
-    public Object set(int index, E o) {
+    public Object set(int index, Object o) {
 
         return false;
     }
 
     @Override
-    public void add(int index, E data) {
+    public void add(int index, Object data) {
         Node Temp = new Node(data);
         Node Current = head;
 
@@ -188,6 +185,7 @@ public class LinkedListTwo <E> implements MyList<E> {
             }
         }
 
+        assert Current != null;
         Temp.setNext(Current.getNext());
 
         Current.setNext(Temp);
@@ -197,7 +195,7 @@ public class LinkedListTwo <E> implements MyList<E> {
 
 
     @Override
-    public int indexOf(E o) {
+    public int indexOf(Object o) {
         Node pointerNode = head;
         int index = 0;
         while (pointerNode != null && pointerNode.getData() != null) {
@@ -212,20 +210,20 @@ public class LinkedListTwo <E> implements MyList<E> {
     }
 
     @Override
-    public MyList<E> subList(int fromIndex) {
-        return (MyList<E>) subList(fromIndex, counter);
+    public MyList<Object> subList(int fromIndex) {
+        return subList(fromIndex, counter);
     }
 
     @Override
-    public MyList<E> subList(int fromIndex, int toIndex) {
+    public MyList<Object> subList(int fromIndex, int toIndex) {
         if (toIndex > size() || toIndex < fromIndex || toIndex < 0 || fromIndex < 0) {
 
 
             throw new IndexOutOfBoundsException("final index out of range");
         }
-        MyList<E> result = (MyList<E>) new LinkedListTwo<E>();
+        MyList<Object> result = new LinkedListTwo();
         for (int i = fromIndex; i < toIndex; i++) {
-            result.add((E) get(i));
+            result.add(get(i));
         }
         return result;
     }

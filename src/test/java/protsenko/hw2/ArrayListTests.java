@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ArrayListTests {
 
-    private static MyListDemo<Object> listDemo = new MyListDemo<>();
+    private static final MyListDemo<Object> listDemo = new MyListDemo<>();
 
     @BeforeEach
     void setup(){
